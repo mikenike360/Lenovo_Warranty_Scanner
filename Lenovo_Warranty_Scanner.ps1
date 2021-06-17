@@ -27,6 +27,7 @@ $response | ForEach-Object {
         $LastWarranty = $_
     }
 }
+
 ##Grabs todays date and compares it to the warranty date to see
 ##if the computer is in warranty
 $date = Get-Date
