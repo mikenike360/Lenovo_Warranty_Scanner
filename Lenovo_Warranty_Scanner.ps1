@@ -1,9 +1,9 @@
 #####################################
 #    Lenovo Warranty Checker        #
 #   Written By: Michael Venema      #
-#    Edited By: George Stedman      #
-#       Version 1.1                 #
-#     Last Edit 6/17/21             #
+#                                   #
+#       Version 1.2                 #
+#     Last Edit 7/23/21             #
 #####################################
 
 ##Grabs the serial number from the local computer
@@ -28,16 +28,6 @@ $response | ForEach-Object {
     }
 }
 
-##Grabs todays date and compares it to the warranty date to see
-##if the computer is in warranty
-$date = Get-Date
-$WEnd = [datetime]::parseexact($lastWarranty.End.split("T")[0], 'yyyy-MM-dd', $null)
-if ($WEnd -gt $date){
-    $In = "True"
-}else{
-    $In = "False"
-}
-
 ##Create a custom PS object with the information g
 $finalResponse = [PSCustomObject]@{
 "Serial Number"     = $response.Serial
@@ -47,7 +37,7 @@ Manufacturer        = "Lenovo"
 "Warranty Name"     = $LastWarranty.Name
 "Warranty Start"    = $LastWarranty.Start.split("T")[0]
 "Warranty End"      = $LastWarranty.End.split("T")[0]
-"In Warranty"       = $In
+"In Warranty"       = $response.InWarranty
 }
 
 ##displays results to console
